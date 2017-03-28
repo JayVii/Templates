@@ -1,0 +1,225 @@
+%----------------------------------------------------------------------------------------
+% Information
+%----------------------------------------------------------------------------------------
+% https://git.jayvii.de/Templates/files/tip/TeX/Papers
+% JayVii - jayvii@riseup.net
+
+%----------------------------------------------------------------------------------------
+% Document-Class
+%----------------------------------------------------------------------------------------
+\documentclass[12pt,a4paper]{article}
+% DinA4, Font-size 12
+
+%----------------------------------------------------------------------------------------
+% Packets
+%----------------------------------------------------------------------------------------
+%----- UTF8 input-encoding
+\usepackage[utf8]{inputenc}
+%----- 8-bit output-encoding (256 Symbole)
+\usepackage[T1]{fontenc}
+%----- Hyphenation: german
+\usepackage[german]{babel}
+%----- Font: Times Roman (Times New Roman look-alike)
+\usepackage{mathptmx}
+%----- NatBib Bibliografie
+\usepackage[round]{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+%----- Graphics
+\usepackage{graphicx}
+%----- URLs - \url{}
+\usepackage{url}
+%----- Colors
+\usepackage{color}
+%----- Tables
+\usepackage{tabularx}
+%----- Force positions of objects with [H]
+\usepackage{float}
+%----- Fix for wrong vertical space above tables
+\usepackage[tableposition=top]{caption}
+%----- Acronyms
+\usepackage[withpage]{acronym}
+%----- Indentation
+\setlength\parindent{0pt}
+%----- Margins
+\usepackage[left=3cm,right=2cm,top=2.5cm,bottom=2.5cm,footnotesep=1cm,]{geometry}
+%----- Line-spacing
+\usepackage[onehalfspacing]{setspace}
+%----- Header
+\usepackage{fancyhdr}
+\headheight=15pt
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[CO,CE]{\rightmark}
+\fancyfoot[RO, RE]{\thepage}
+%----- Change title-formats (disabled by default)
+%\usepackage{titlesec}
+%\titleformat{\section}{\normalfont\large\textbf\bfseries}
+%\titleformat{\subsection}{\normalfont\large\bfseries}
+%\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}
+%----- Change stuff per page (disabled by default)
+%\usepackage{perpage}
+%\MakePerPage{footnote}
+
+%----------------------------------------------------------------------------------------
+% Document
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+%--------------------
+% Titlepage
+%--------------------
+	\begin{titlepage}
+		\begin{center}
+			\textsc{\LARGE{Institution}}\\[24pt]
+			\textsc{\large{Subject}}\\[50pt]
+
+			\rule{\linewidth}{0.5mm}\\[6pt]
+			\Large{\textbf{Prefix}}\\
+			\huge{\textbf{TITLE}}\\
+			\rule{\linewidth}{0.5mm}\\[80pt]
+
+			\begin{minipage}{0.4\textwidth}
+				\begin{flushleft}
+					\large
+					\emph{submitted by:}\\
+					[Name]\\
+					Matr.-Nr.: [000]\\
+					[Mail]\\
+					[Subject of study]
+				\end{flushleft}
+			\end{minipage}
+			~
+			\begin{minipage}{0.4\textwidth}
+				\begin{flushright}
+					\large
+					\emph{Lecturer:} \\
+					[Name]\\
+					\emph{Professorship:} \\
+					[Professorship]\\
+					[Name]\\
+				\end{flushright}
+			\end{minipage}\\[120pt]
+
+			\Large{\date}\\
+			\vfill
+		\end{center}
+	\end{titlepage}
+
+%--------------------
+% Table of Content
+%--------------------
+	\renewcommand{\thepage}{\Roman{page}}
+	\setcounter{page}{2}
+	\tableofcontents
+
+	\newpage %----------
+
+%--------------------
+% Table of Figures
+%--------------------
+
+	\listoffigures
+	\addcontentsline{toc}{section}{Figures}
+	%---
+	\listoftables
+	\addcontentsline{toc}{section}{Tables}
+
+	\newpage %----------
+
+%--------------------
+% Acronyms
+%--------------------
+
+	\fancyhead[CO,CE]{ACRONYMS} %--- workaround {
+
+	\section*{Acronyms}
+	\addcontentsline{toc}{section}{Acronyms}
+	\begin{acronym}[NSM] % \ac{acronym}
+		\acro{TL;DR}{Too Long, Didn't Read}
+	\end{acronym}
+
+	\newpage %----------
+
+	\fancyhead[CO,CE]{\rightmark} %--- workaround }
+
+%--------------------
+% Actual Text
+%--------------------
+	%--- arabic page-numbers, arabic section-numbers
+	\renewcommand{\thepage}{\arabic{page}}
+	\setcounter{page}{1}
+	\renewcommand{\thesection}{\arabic{section}}
+	\setcounter{section}{0}
+
+	\section{Introduction}
+	Some text here \\[6pt]
+	\indent{
+		\emph{
+		,,introducing and long citation.''
+		} \citet[p. 00]{citeacro} % Author (Year, Page)
+	}\\[6pt]
+	Some more text
+	\newpage %----------
+
+	\section{Topic 1}
+	some text here\footnote{
+		,,Definition here.'' \citep[see][p. 00]{acroname} % (see Author Year, Page)
+	}
+	and some more text here.
+
+	\subsection{Topic 1.1}
+	some text.
+
+	\subsection{Topic 1.2}
+	%--- referencable: \ref{sec:t1-2}
+	\label{sec:t1-2}
+	this has some text as well.
+	
+	\section{Topic 2}
+	some text with a reference (see Section~\ref{sec:t1-2} and Figure~\ref{fig:f1}).
+
+	\begin{figure}
+		\centering
+		\caption{CAPTION HERE}
+		\includegraphics[width=1.0\textwidth]{./graphics/myplot.pdf}\\
+		\label{fig:f1}
+		\footnotesize{Mention the source here \citet{acroname}}
+	\end{figure}
+
+	\subsection{Topic 2.1}
+	This has some text here with a table that HAS to be displayed exactly here:
+
+	\begin{table}[H] % [H] to force position (see: packages)
+		\centering
+		\caption{Caption}
+		\begin{tabular}{| m{13cm} | m{1.5cm} |} % align: mid, with fixed sizes (13/1.5 cm)
+			\hline
+			something goes here & 1% \\
+			something else goes here & 99% \\
+			\hline
+			and something unrelated goes here & null \\
+			\hline
+		\end{tabular}\\[10pt]
+		\footnotesize{Mention source here}
+		\label{table:ProbDez} % give it a label to make it referencable
+	\end{table}
+
+	Followed by some text.
+
+	\newpage %----------
+
+%----------------------------------------------------------------------------------------
+% Literature
+%----------------------------------------------------------------------------------------
+	% Cite with \citep{name}
+	%--- roman page-numbers (starts with 5)
+	\renewcommand{\thepage}{\Roman{page}}
+	\setcounter{page}{5}
+	\bibliography{./template_paper} % bib-file without .bib postfix
+	\bibliographystyle{plainnat} % cite-style (path, if custom)
+	\addcontentsline{toc}{section}{Literatur}
+\end{document}
+
+%----------------------------------------------------------------------------------------
+% EOF
