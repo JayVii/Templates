@@ -1,0 +1,29 @@
+\documentclass[10pt,oneside,final]{article}
+
+\usepackage[paperwidth=5.8cm,paperheight=8.89cm,left=0.1cm,right=0.1cm,top=0.5cm,bottom=0.5cm,noheadfoot]{geometry}
+\setlength{\baselineskip}{0cm}
+\setlength{\topskip}{0pt}
+
+\usepackage{fontawesome}
+\usepackage{tabularx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{qrcode}
+
+\definecolor{colA}{RGB}{0,0,0}
+\definecolor{colB}{RGB}{100,100,100}
+\definecolor{colC}{RGB}{39,121,31}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\begin{document}
+  
+  \pagenumbering{gobble}
+
+  \input{./front.tex}
+  \input{./back.tex}
+
+\end{document}
